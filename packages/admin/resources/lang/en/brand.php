@@ -15,6 +15,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No brands',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',
@@ -29,6 +34,9 @@ return [
         ],
     ],
     'pages' => [
+        'edit' => [
+            'label' => 'Basic Information',
+        ],
         'products' => [
             'label' => 'Products',
             'actions' => [
@@ -49,6 +57,10 @@ return [
                     ],
                 ],
             ],
+            'empty_state' => [
+                'label' => 'No products',
+                'description' => '',
+            ],
         ],
         'collections' => [
             'label' => 'Collections',
@@ -61,10 +73,9 @@ return [
                     ],
                 ],
             ],
-            'actions' => [
-                'attach' => [
-                    'label' => 'Associate a collection',
-                ],
+            'empty_state' => [
+                'label' => 'No collections',
+                'description' => '',
             ],
         ],
     ],

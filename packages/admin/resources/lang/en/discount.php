@@ -40,6 +40,17 @@ return [
                 ],
             ],
         ],
+        'type' => [
+            'label' => 'Type',
+            'options' => [
+                'amount_off' => [
+                    'label' => 'Amount Off',
+                ],
+                'buy_x_get_y' => [
+                    'label' => 'Buy X Get Y',
+                ],
+            ],
+        ],
         'stop' => [
             'label' => 'Stop other discounts applying after this one',
         ],
@@ -57,6 +68,12 @@ return [
         ],
         'minimum_cart_amount' => [
             'label' => 'Minimum Cart Amount',
+        ],
+        'fixed_value' => [
+            'label' => 'Fixed Amount',
+        ],
+        'percentage' => [
+            'label' => 'Percentage',
         ],
         'min_qty' => [
             'label' => 'Product Quantity',
@@ -104,7 +121,14 @@ return [
             'label' => 'End Date',
         ],
     ],
+    'empty_state' => [
+        'label' => 'No discounts',
+        'description' => '',
+    ],
     'pages' => [
+        'edit' => [
+            'label' => 'Basic Information',
+        ],
         'availability' => [
             'label' => 'Availability',
         ],
@@ -120,6 +144,10 @@ return [
                 'attach' => [
                     'label' => 'Attach Collection',
                 ],
+            ],
+            'empty_state' => [
+                'label' => 'No collections',
+                'description' => '',
             ],
             'table' => [
                 'name' => [
@@ -137,6 +165,7 @@ return [
             ],
             'form' => [
                 'type' => [
+                    'label' => 'Type',
                     'options' => [
                         'limitation' => [
                             'label' => 'Limitation',
@@ -156,6 +185,10 @@ return [
                     'label' => 'Attach Brand',
                 ],
             ],
+            'empty_state' => [
+                'label' => 'No brands',
+                'description' => '',
+            ],
             'table' => [
                 'name' => [
                     'label' => 'Name',
@@ -172,6 +205,7 @@ return [
             ],
             'form' => [
                 'type' => [
+                    'label' => 'Type',
                     'options' => [
                         'limitation' => [
                             'label' => 'Limitation',
@@ -190,6 +224,10 @@ return [
                 'attach' => [
                     'label' => 'Add Product',
                 ],
+            ],
+            'empty_state' => [
+                'label' => 'No products',
+                'description' => 'Create a discount purchasable to get started.',
             ],
             'table' => [
                 'name' => [
@@ -226,6 +264,10 @@ return [
                     'label' => 'Add Product',
                 ],
             ],
+            'empty_state' => [
+                'label' => 'No rewards',
+                'description' => 'Create a discount purchasable to get started.',
+            ],
             'table' => [
                 'name' => [
                     'label' => 'Name',
@@ -261,6 +303,10 @@ return [
                     'label' => 'Add Product',
                 ],
             ],
+            'empty_state' => [
+                'label' => 'No conditions',
+                'description' => 'Create a discount purchasable to get started.',
+            ],
             'table' => [
                 'name' => [
                     'label' => 'Name',
@@ -295,6 +341,10 @@ return [
                 'attach' => [
                     'label' => 'Add Product Variant',
                 ],
+            ],
+            'empty_state' => [
+                'label' => 'No product variants',
+                'description' => 'Create a discount purchasable to get started.',
             ],
             'table' => [
                 'name' => [

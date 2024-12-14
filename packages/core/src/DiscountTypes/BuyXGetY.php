@@ -18,7 +18,7 @@ class BuyXGetY extends AbstractDiscountType
      */
     public function getName(): string
     {
-        return 'Buy X Get Y';
+        return __('lunarpanel::discount.form.type.options.buy_x_get_y.label');
     }
 
     /**

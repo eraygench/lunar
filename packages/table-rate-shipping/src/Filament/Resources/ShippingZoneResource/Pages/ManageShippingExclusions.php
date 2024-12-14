@@ -21,7 +21,7 @@ class ManageShippingExclusions extends ManageRelatedRecords
 
     public function getTitle(): string|Htmlable
     {
-        return __('lunarpanel.shipping::relationmanagers.exclusions.title_plural');
+        return __('lunarpanel.shipping::relationmanagers.exclusionlists.title_plural');
     }
 
     public static function getNavigationIcon(): ?string
@@ -31,7 +31,7 @@ class ManageShippingExclusions extends ManageRelatedRecords
 
     public static function getNavigationLabel(): string
     {
-        return __('lunarpanel.shipping::relationmanagers.exclusions.title_plural');
+        return __('lunarpanel.shipping::relationmanagers.exclusionlists.title_plural');
     }
 
     public function form(Form $form): Form
@@ -41,22 +41,26 @@ class ManageShippingExclusions extends ManageRelatedRecords
 
     public function table(Table $table): Table
     {
-        return $table->columns(
-            ShippingExclusionListResource::getTableColumns(),
-        )->headerActions([
-            Tables\Actions\AttachAction::make()
-                ->color('primary')
-                ->label(
-                    __('lunarpanel.shipping::relationmanagers.exclusions.actions.attach.label')
-                )
-                ->preloadRecordSelect()
-                ->recordTitleAttribute('name'),
-        ])->actions([
-            Tables\Actions\DetachAction::make('detach')
-                ->label(
-                    __('lunarpanel.shipping::relationmanagers.exclusions.actions.detach.label')
-                ),
+        return $table
+            ->modelLabel(__('lunarpanel.shipping::relationmanagers.exclusionlists.title'))
+            ->emptyStateHeading(__('lunarpanel.shipping::relationmanagers.exclusionlists.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel.shipping::relationmanagers.exclusionlists.empty_state.description'))
+            ->columns(
+                ShippingExclusionListResource::getTableColumns(),
+            )->headerActions([
+                Tables\Actions\AttachAction::make()
+                    ->color('primary')
+                    ->label(
+                        __('lunarpanel.shipping::relationmanagers.exclusionlists.actions.attach.label')
+                    )
+                    ->preloadRecordSelect()
+                    ->recordTitleAttribute('name'),
+            ])->actions([
+                Tables\Actions\DetachAction::make('detach')
+                    ->label(
+                        __('lunarpanel.shipping::relationmanagers.exclusionlists.actions.detach.label')
+                    ),
 
-        ]);
+            ]);
     }
 }

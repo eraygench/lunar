@@ -140,13 +140,15 @@ class ShippingMethodResource extends BaseResource
             ->options([
                 'ship-by' => __('lunarpanel.shipping::shippingmethod.form.driver.options.ship-by'),
                 'collection' => __('lunarpanel.shipping::shippingmethod.form.driver.options.collection'),
-            ])->label('Type')
+            ])
             ->default('ship-by');
     }
 
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel.shipping::shippingmethod.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel.shipping::shippingmethod.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

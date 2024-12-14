@@ -5,6 +5,9 @@ return [
         'create_root' => [
             'label' => 'Create Root Collection',
         ],
+        'make_root' => [
+            'label' => 'Make Root Collection',
+        ],
         'create_child' => [
             'label' => 'Create Child Collection',
         ],

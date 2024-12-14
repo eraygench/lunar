@@ -7,11 +7,16 @@ return [
         ],
     ],
     'shipping_rates' => [
+        'title' => 'Shipping Rate',
         'title_plural' => 'Shipping Rates',
         'actions' => [
             'create' => [
                 'label' => 'Create Shipping Rate',
             ],
+        ],
+        'empty_state' => [
+            'label' => 'No shipping rates',
+            'description' => '',
         ],
         'notices' => [
             'prices_incl_tax' => 'All prices include tax, which will be considered when calculating minimum spend.',
@@ -56,16 +61,31 @@ return [
         ],
     ],
     'exclusions' => [
+        'title' => 'Shipping Exclusion',
         'title_plural' => 'Shipping Exclusions',
         'form' => [
             'purchasable' => [
                 'label' => 'Product',
             ],
         ],
-        'actions' => [
-            'create' => [
-                'label' => 'Add shipping exclusion list',
+        'empty_state' => [
+            'label' => 'No shipping exclusions',
+            'description' => '',
+        ],
+    ],
+    'exclusionlists' => [
+        'title' => 'Shipping Exclusion List',
+        'title_plural' => 'Shipping Exclusion Lists',
+        'form' => [
+            'purchasable' => [
+                'label' => 'Product',
             ],
+        ],
+        'empty_state' => [
+            'label' => 'No shipping exclusion lists',
+            'description' => '',
+        ],
+        'actions' => [
             'attach' => [
                 'label' => 'Add exclusion list',
             ],

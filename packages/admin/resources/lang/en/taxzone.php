@@ -12,6 +12,11 @@ return [
         ],
         'zone_type' => [
             'label' => 'Zone Type',
+            'options' => [
+                'country' => 'Limit to Countries',
+                'states' => 'Limit to States',
+                'postcodes' => 'Limit to Postcodes',
+            ],
         ],
         'active' => [
             'label' => 'Active',
@@ -19,6 +24,11 @@ return [
         'default' => [
             'label' => 'Default',
         ],
+    ],
+
+    'empty_state' => [
+        'label' => 'No tax zones',
+        'description' => '',
     ],
 
     'form' => [

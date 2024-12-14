@@ -17,6 +17,11 @@ class TaxRateAmountRelationManager extends RelationManager
 
     protected static string $relationship = 'taxRateAmounts';
 
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::relationmanagers.tax_rate_amounts.title');
+    }
+
     public function isReadOnly(): bool
     {
         return false;
@@ -36,16 +41,29 @@ class TaxRateAmountRelationManager extends RelationManager
                         fn ($query, $value) => $query->where('tax_rate_id', $value->id)
                     )
                 )
-                ->relationship(name: 'taxClass', titleAttribute: 'name'),
-            TextInput::make('percentage')->numeric()->required(),
+                ->relationship(name: 'taxClass', titleAttribute: 'name')->label(
+                    __('lunarpanel::relationmanagers.tax_rate_amounts.table.tax_class.label')
+                ),
+            TextInput::make('percentage')->label(
+                __('lunarpanel::relationmanagers.tax_rate_amounts.table.percentage.label')
+            )->numeric()->required(),
         ])->columns(2);
     }
 
     public function table(Table $table): Table
     {
         return $table
+            ->heading(
+                __('lunarpanel::relationmanagers.tax_rate_amounts.table.heading'),
+            )
             ->description(
                 __('lunarpanel::relationmanagers.tax_rate_amounts.table.description')
+            )
+            ->emptyStateHeading(
+                __('lunarpanel::relationmanagers.tax_rate_amounts.table.empty_state.label')
+            )
+            ->emptyStateDescription(
+                __('lunarpanel::relationmanagers.tax_rate_amounts.table.empty_state.description')
             )
             ->paginated(false)
             ->headerActions([

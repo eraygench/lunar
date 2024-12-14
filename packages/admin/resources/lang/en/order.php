@@ -60,6 +60,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No orders',
+        'description' => '',
+    ],
+
     'form' => [
         'address' => [
             'first_name' => [
@@ -253,6 +258,9 @@ return [
             'label' => 'Download PDF',
             'notification' => 'Order PDF downloading',
         ],
+        'view_customer' => [
+            'label' => 'View Customer',
+        ],
         'edit_address' => [
             'label' => 'Edit',
 
@@ -286,6 +294,9 @@ return [
                 'error' => 'There was a problem with the refund',
                 'success' => 'Refund successful',
             ],
+        ],
+        'view' => [
+            'label' => 'View',
         ],
     ],
 

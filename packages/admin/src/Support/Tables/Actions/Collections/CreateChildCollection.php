@@ -25,12 +25,16 @@ class CreateChildCollection extends CreateAction
         });
 
         $this->form([
-            TranslatedText::make('name')->required(),
+            TranslatedText::make('name')
+                ->label(__('lunarpanel::collection.pages.children.table.name.label'))
+                ->required(),
         ]);
 
         $this->createAnother(false);
 
         $this->label(
+            __('lunarpanel::collection.pages.children.actions.create_child.label')
+        )->modalHeading(
             __('lunarpanel::collection.pages.children.actions.create_child.label')
         );
     }

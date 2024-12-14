@@ -76,19 +76,22 @@ class LanguageResource extends BaseResource
 
     protected static function getDefaultTable(Tables\Table $table): Tables\Table
     {
-        return $table->columns([
-            BadgeableColumn::make('name')
-                ->separator('')
-                ->suffixBadges([
-                    Badge::make('default')
-                        ->label(__('lunarpanel::language.table.default.label'))
-                        ->color('gray')
-                        ->visible(fn (Model $record) => $record->default),
-                ])
-                ->label(__('lunarpanel::language.table.name.label')),
-            Tables\Columns\TextColumn::make('code')
-                ->label(__('lunarpanel::language.table.code.label')),
-        ]);
+        return $table
+            ->emptyStateHeading(__('lunarpanel::language.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::language.empty_state.description'))
+            ->columns([
+                BadgeableColumn::make('name')
+                    ->separator('')
+                    ->suffixBadges([
+                        Badge::make('default')
+                            ->label(__('lunarpanel::language.table.default.label'))
+                            ->color('gray')
+                            ->visible(fn (Model $record) => $record->default),
+                    ])
+                    ->label(__('lunarpanel::language.table.name.label')),
+                Tables\Columns\TextColumn::make('code')
+                    ->label(__('lunarpanel::language.table.code.label')),
+            ]);
     }
 
     public static function getDefaultRelations(): array

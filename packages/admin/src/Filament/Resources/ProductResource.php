@@ -229,9 +229,12 @@ class ProductResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::product.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::product.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 Tables\Filters\SelectFilter::make('brand')
+                    ->label(__('lunarpanel::product.table.brand.label'))
                     ->relationship('brand', 'name'),
                 Tables\Filters\TrashedFilter::make(),
             ])

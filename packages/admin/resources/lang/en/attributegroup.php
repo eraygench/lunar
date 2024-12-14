@@ -21,6 +21,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No attribute groups',
+        'description' => '',
+    ],
+
     'form' => [
         'attributable_type' => [
             'label' => 'Type',
@@ -34,6 +39,15 @@ return [
         'position' => [
             'label' => 'Position',
         ],
+    ],
+
+    'attributable_types' => [
+        'brand' => 'Brand',
+        'collection' => 'Collection',
+        'customer' => 'Customer',
+        'customer_group' => 'Customer Group',
+        'product' => 'Product',
+        'product_variant' => 'Product Variant',
     ],
 
     'action' => [

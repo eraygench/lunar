@@ -15,7 +15,7 @@ class AmountOff extends AbstractDiscountType
      */
     public function getName(): string
     {
-        return 'Amount off';
+        return __('lunarpanel::discount.form.type.options.amount_off.label');
     }
 
     /**

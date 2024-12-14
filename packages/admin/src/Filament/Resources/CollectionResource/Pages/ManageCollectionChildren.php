@@ -59,24 +59,27 @@ class ManageCollectionChildren extends BaseManageRelatedRecords
     {
         $record = $this->getOwnerRecord();
 
-        return $table->columns([
-            Tables\Columns\TextColumn::make('attribute_data.name')
-                ->label(
-                    __('lunarpanel::collection.pages.children.table.name.label')
-                )
-                ->formatStateUsing(fn (Model $record): string => $record->attr('name')),
-            Tables\Columns\TextColumn::make('children_count')->counts('children')
-                ->label(
-                    __('lunarpanel::collection.pages.children.table.children_count.label')
+        return $table
+            ->emptyStateHeading(__('lunarpanel::collection.pages.children.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::collection.pages.children.empty_state.description'))
+            ->columns([
+                Tables\Columns\TextColumn::make('attribute_data.name')
+                    ->label(
+                        __('lunarpanel::collection.pages.children.table.name.label')
+                    )
+                    ->formatStateUsing(fn (Model $record): string => $record->attr('name')),
+                Tables\Columns\TextColumn::make('children_count')->counts('children')
+                    ->label(
+                        __('lunarpanel::collection.pages.children.table.children_count.label')
+                    ),
+            ])->actions([
+                Tables\Actions\ViewAction::make()->url(function (Model $record) {
+                    return CollectionResource::getUrl('edit', ['record' => $record]);
+                }),
+            ])->headerActions([
+                CreateChildCollection::make('createChildCollection')->after(
+                    fn () => ChildCollectionCreated::dispatch($this->getRecord())
                 ),
-        ])->actions([
-            Tables\Actions\ViewAction::make()->url(function (Model $record) {
-                return CollectionResource::getUrl('edit', ['record' => $record]);
-            }),
-        ])->headerActions([
-            CreateChildCollection::make('createChildCollection')->after(
-                fn () => ChildCollectionCreated::dispatch($this->getRecord())
-            ),
-        ]);
+            ]);
     }
 }

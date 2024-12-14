@@ -25,6 +25,11 @@ class AttributesRelationManager extends BaseRelationManager
         return __('lunarpanel::attribute.plural_label');
     }
 
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::attribute.label');
+    }
+
     protected static ?string $recordTitleAttribute = 'name.en';  // TODO: localise somehow
 
     public function getDefaultForm(Form $form): Form
@@ -115,6 +120,8 @@ class AttributesRelationManager extends BaseRelationManager
     public function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::attribute.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::attribute.empty_state.description'))
             ->columns([
                 TranslatedTextColumn::make('name')->label(
                     __('lunarpanel::attribute.table.name.label')
@@ -128,7 +135,7 @@ class AttributesRelationManager extends BaseRelationManager
                     ),
                 Tables\Columns\TextColumn::make('type')->label(
                     __('lunarpanel::attribute.table.type.label')
-                ),
+                )->formatStateUsing(fn ($state) => __('lunarpanel::fieldtypes.'.strtolower(class_basename($state)).'.label')),
             ])
             ->filters([
                 //

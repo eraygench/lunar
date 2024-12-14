@@ -85,9 +85,31 @@ return [
             'popular_products' => [
                 'heading' => 'Best sellers (last 12 months)',
                 'description' => 'These figures are based on the number of times a product appears on an order, not the quantity ordered.',
+                'empty_state' => [
+                    'label' => 'No orders',
+                    'description' => '',
+                ],
+                'table' => [
+                    'description' => [
+                        'label' => 'Description',
+                    ],
+                    'identifier' => [
+                        'label' => 'Identifier',
+                    ],
+                    'quantity' => [
+                        'label' => 'Quantity',
+                    ],
+                    'sub_total' => [
+                        'label' => 'Sub Total',
+                    ],
+                ],
             ],
             'latest_orders' => [
                 'heading' => 'Latest orders',
+                'empty_state' => [
+                    'label' => 'No orders',
+                    'description' => '',
+                ],
             ],
         ],
     ],

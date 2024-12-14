@@ -26,7 +26,7 @@ return [
             'label' => 'States',
         ],
         'countries' => [
-            'label' => 'States',
+            'label' => 'Countries',
         ],
         'postcodes' => [
             'label' => 'Postcodes',
@@ -45,6 +45,15 @@ return [
                 'states' => 'Limit to States / Provinces',
                 'postcodes' => 'Limit to Postcodes',
             ],
+        ],
+    ],
+    'empty_state' => [
+        'label' => 'No shipping zones',
+        'description' => '',
+    ],
+    'pages' => [
+        'edit' => [
+            'label' => 'Basic Information',
         ],
     ],
 ];

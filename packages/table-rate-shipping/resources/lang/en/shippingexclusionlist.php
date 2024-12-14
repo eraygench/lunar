@@ -16,4 +16,8 @@ return [
             'label' => 'No. Products',
         ],
     ],
+    'empty_state' => [
+        'label' => 'No shipping exclusion lists',
+        'description' => '',
+    ],
 ];

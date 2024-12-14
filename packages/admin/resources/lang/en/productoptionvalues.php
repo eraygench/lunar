@@ -2,30 +2,27 @@
 
 return [
 
-    'label' => 'Tax Class',
+    'label' => 'Value',
 
-    'plural_label' => 'Tax Classes',
+    'plural_label' => 'Values',
 
     'table' => [
         'name' => [
             'label' => 'Name',
         ],
-        'default' => [
-            'label' => 'Default',
+        'position' => [
+            'label' => 'Position',
         ],
     ],
 
     'empty_state' => [
-        'label' => 'No tax classes',
+        'label' => 'No values',
         'description' => '',
     ],
 
     'form' => [
         'name' => [
             'label' => 'Name',
-        ],
-        'default' => [
-            'label' => 'Default',
         ],
     ],
 

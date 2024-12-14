@@ -16,6 +16,12 @@ return [
         ],
     ],
 
+    'tabs' => [
+        'all' => 'All',
+        'draft' => 'Draft',
+        'published' => 'Published',
+    ],
+
     'table' => [
         'status' => [
             'label' => 'Status',
@@ -40,6 +46,11 @@ return [
         'producttype' => [
             'label' => 'Product Type',
         ],
+    ],
+
+    'empty_state' => [
+        'label' => 'No products',
+        'description' => '',
     ],
 
     'actions' => [
@@ -114,10 +125,30 @@ return [
             'label' => 'Variants',
         ],
         'collections' => [
-            'label' => 'Collections',
+            'label' => 'Collection',
+            'plural_label' => 'Collections',
+            'empty_state' => [
+                'label' => 'No collections',
+                'description' => '',
+            ],
         ],
         'associations' => [
-            'label' => 'Product Associations',
+            'label' => 'Product Association',
+            'plural_label' => 'Product Associations',
+            'empty_state' => [
+                'label' => 'No product associations',
+                'description' => 'Create a product association to get started.',
+            ],
+            'form' => [
+                'type' => [
+                    'label' => 'Type',
+                    'options' => [
+                        'alternate' => 'Alternate',
+                        'cross-sell' => 'Cross-Sell',
+                        'up-sell' => 'Upsell',
+                    ],
+                ],
+            ],
         ],
     ],
 

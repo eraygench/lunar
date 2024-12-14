@@ -81,6 +81,8 @@ class TaxRateResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::taxrate.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::taxrate.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //
@@ -98,7 +100,8 @@ class TaxRateResource extends BaseResource
     protected static function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('name'),
+            Tables\Columns\TextColumn::make('name')
+                ->label(__('lunarpanel::taxrate.table.name.label')),
             Tables\Columns\TextColumn::make('taxZone.name')
                 ->label(__('lunarpanel::taxrate.table.tax_zone.label')),
             Tables\Columns\TextColumn::make('priority')

@@ -14,6 +14,11 @@ class ChannelRelationManager extends BaseRelationManager
 
     protected static string $relationship = 'channels';
 
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::relationmanagers.channels.title');
+    }
+
     public function isReadOnly(): bool
     {
         return false;
@@ -53,7 +58,9 @@ class ChannelRelationManager extends BaseRelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->description(
+            ->heading(
+                __('lunarpanel::relationmanagers.channels.title_plural')
+            )->description(
                 __('lunarpanel::relationmanagers.channels.table.description')
             )->paginated(false)
             ->headerActions([

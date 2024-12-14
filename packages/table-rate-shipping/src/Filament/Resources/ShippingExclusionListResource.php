@@ -77,6 +77,8 @@ class ShippingExclusionListResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel.shipping::shippingexclusionlist.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel.shipping::shippingexclusionlist.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

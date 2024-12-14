@@ -60,7 +60,7 @@ class ProductVariantResource extends BaseResource
             ]) => $productVariant->product->attr('name'),
             ProductResource::getUrl('variants', [
                 'record' => $productVariant->product,
-            ]) => 'Variants',
+            ]) => __('lunarpanel::product.pages.variants.label'),
             ProductVariantResource::getUrl('edit', [
                 'record' => $productVariant,
             ]) => $productVariant->sku,

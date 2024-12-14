@@ -18,6 +18,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No collection groups',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',

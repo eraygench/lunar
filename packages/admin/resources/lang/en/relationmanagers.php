@@ -2,6 +2,8 @@
 
 return [
     'customer_groups' => [
+        'title' => 'Customer Group',
+        'title_plural' => 'Customer Groups',
         'actions' => [
             'attach' => [
                 'label' => 'Attach Customer Group',
@@ -50,6 +52,8 @@ return [
         ],
     ],
     'channels' => [
+        'title' => 'Channel',
+        'title_plural' => 'Channels',
         'actions' => [
             'attach' => [
                 'label' => 'Schedule another Channel',
@@ -108,6 +112,10 @@ return [
             ],
         ],
         'table' => [
+            'empty_state' => [
+                'label' => 'No media',
+                'description' => '',
+            ],
             'image' => [
                 'label' => 'Image',
             ],
@@ -147,6 +155,10 @@ return [
             ],
         ],
         'table' => [
+            'empty_state' => [
+                'label' => 'No URLs',
+                'description' => 'Create a URL to get started.',
+            ],
             'slug' => [
                 'label' => 'Slug',
             ],
@@ -249,8 +261,15 @@ return [
         ],
     ],
     'tax_rate_amounts' => [
+        'title' => 'Tax Rate Amount',
+        'title_plural' => 'Tax Rate Amounts',
         'table' => [
+            'heading' => 'Tax Rate Amounts',
             'description' => '',
+            'empty_state' => [
+                'label' => 'No tax rate amounts',
+                'description' => '',
+            ],
             'percentage' => [
                 'label' => 'Percentage',
             ],

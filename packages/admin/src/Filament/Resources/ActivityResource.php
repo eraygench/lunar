@@ -88,6 +88,8 @@ class ActivityResource extends BaseResource
     public static function getDefaultTable(Tables\Table $table): Tables\Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::activity.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::activity.empty_state.description'))
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
@@ -97,6 +99,7 @@ class ActivityResource extends BaseResource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label(__('lunarpanel::activity.table.description'))
+                    ->formatStateUsing(fn ($state) => __('lunarpanel::activity.table.event.options.'.$state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('log_name')
                     ->label(__('lunarpanel::activity.table.log')),
@@ -106,12 +109,12 @@ class ActivityResource extends BaseResource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('event')
-                    ->label(__('lunarpanel::activity.table.event'))
+                    ->label(__('lunarpanel::activity.table.event.label'))
                     ->multiple()
-                    ->options([
-                        'created' => 'Created',
-                        'updated' => 'Updated',
-                        'deleted' => 'Deleted',
+                    ->options(fn () => [
+                        'created' => __('lunarpanel::activity.table.event.options.created'),
+                        'updated' => __('lunarpanel::activity.table.event.options.updated'),
+                        'deleted' => __('lunarpanel::activity.table.event.options.deleted'),
                     ]),
                 Tables\Filters\Filter::make('created_at')
                     ->form([

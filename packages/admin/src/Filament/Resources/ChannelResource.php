@@ -98,6 +98,8 @@ class ChannelResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::channel.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::channel.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

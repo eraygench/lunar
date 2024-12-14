@@ -14,6 +14,16 @@ class ValuesRelationManager extends BaseRelationManager
 {
     protected static string $relationship = 'values';
 
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('lunarpanel::productoptionvalues.plural_label');
+    }
+
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::productoptionvalues.label');
+    }
+
     public function getTableRecordTitle(Model $record): ?string
     {
         return $record->translate('name');
@@ -24,6 +34,7 @@ class ValuesRelationManager extends BaseRelationManager
         return $form
             ->schema([
                 TranslatedText::make('name')
+                    ->label(__('lunarpanel::productoptionvalues.form.name.label'))
                     ->required()
                     ->maxLength(255),
             ]);
@@ -32,10 +43,13 @@ class ValuesRelationManager extends BaseRelationManager
     public function getDefaultTable(Table $table): Table
     {
         return $table
-
+            ->emptyStateHeading(__('lunarpanel::productoptionvalues.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::productoptionvalues.empty_state.description'))
             ->columns([
-                TranslatedTextColumn::make('name'),
-                Tables\Columns\TextColumn::make('position'),
+                TranslatedTextColumn::make('name')
+                    ->label(__('lunarpanel::productoptionvalues.table.name.label')),
+                Tables\Columns\TextColumn::make('position')
+                    ->label(__('lunarpanel::productoptionvalues.table.position.label')),
             ])
             ->filters([
                 //

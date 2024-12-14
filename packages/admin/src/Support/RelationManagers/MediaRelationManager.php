@@ -21,6 +21,11 @@ class MediaRelationManager extends BaseRelationManager
 
     public string $mediaCollection = 'default';
 
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::relationmanagers.medias.title');
+    }
+
     public function isReadOnly(): bool
     {
         return false;
@@ -61,6 +66,8 @@ class MediaRelationManager extends BaseRelationManager
             ->description(function () {
                 return $this->getOwnerRecord()->getMediaCollectionDescription($this->mediaCollection) ?? '';
             })
+            ->emptyStateHeading(__('lunarpanel::relationmanagers.medias.table.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::relationmanagers.medias.table.empty_state.description'))
             ->recordTitleAttribute('name')
             ->modifyQueryUsing(fn (Builder $query) => $query->where('collection_name', $this->mediaCollection)->orderBy('order_column'))
             ->columns([

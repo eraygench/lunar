@@ -73,7 +73,7 @@ class NewVsReturningCustomersChart extends ApexChartWidget
         $returningCustomers = [];
 
         foreach ($period as $date) {
-            $labels[] = $date->format('F Y');
+            $labels[] = $date->isoFormat('MMMM YYYY');
             $report = $results->first(function ($month) use ($date) {
                 return $month->monthstamp == $date->format('Ym');
             });

@@ -38,7 +38,13 @@ class ManageBrandProducts extends BaseManageRelatedRecords
 
     public function table(Table $table): Table
     {
-        return $table->columns([
+        return $table->modelLabel(
+            __('lunarpanel::product.label')
+        )->emptyStateHeading(
+            fn () => __('lunarpanel::brand.pages.products.empty_state.label')
+        )->emptyStateDescription(
+            fn () => __('lunarpanel::brand.pages.products.empty_state.description')
+        )->columns([
             ProductResource::getNameTableColumn()->searchable()
                 ->url(function (Model $record) {
                     return ProductResource::getUrl('edit', [

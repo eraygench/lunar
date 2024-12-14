@@ -41,6 +41,11 @@ class CollectionGroupResource extends BaseResource
         return __('lunarpanel::global.sections.catalog');
     }
 
+    public static function getNavigationLabel(): string
+    {
+        return __('lunarpanel::collection.plural_label');
+    }
+
     public static function getDefaultForm(Form $form): Form
     {
         return $form
@@ -88,6 +93,8 @@ class CollectionGroupResource extends BaseResource
     public static function table(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::tag.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::tag.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

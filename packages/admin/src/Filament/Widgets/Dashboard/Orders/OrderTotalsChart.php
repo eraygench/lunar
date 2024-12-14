@@ -121,7 +121,7 @@ class OrderTotalsChart extends ApexChartWidget
                 'shipping_total' => $report?->shipping_total->decimal ?: 0,
                 'discount_total' => $report?->discount_total->decimal ?: 0,
                 'sub_total' => $report?->sub_total->decimal ?: 0,
-                'month' => $date->format('F'),
+                'month' => $date->isoFormat('MMMM'),
                 'year' => $date->format('Y'),
                 'tax_total' => $report?->tax_total->decimal ?: 0,
             ]);

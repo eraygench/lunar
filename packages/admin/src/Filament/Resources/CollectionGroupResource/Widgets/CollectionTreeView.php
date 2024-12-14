@@ -158,7 +158,11 @@ class CollectionTreeView extends Widget implements HasActions, HasForms
 
     public function makeRootAction()
     {
-        return Action::make('makeRoot')->requiresConfirmation()->icon(
+        return Action::make('makeRoot')->label(
+            __('lunarpanel::actions.collections.make_root.label')
+        )->modalHeading(
+            __('lunarpanel::actions.collections.make_root.label')
+        )->requiresConfirmation()->icon(
             fn () => FilamentIcon::resolve('actions::make-collection-root-action')
         )->action(function (array $arguments) {
             $collection = Collection::find($arguments['id']);

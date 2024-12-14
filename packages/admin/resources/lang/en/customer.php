@@ -36,6 +36,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No customers',
+        'description' => '',
+    ],
+
     'form' => [
         'title' => [
             'label' => 'Title',

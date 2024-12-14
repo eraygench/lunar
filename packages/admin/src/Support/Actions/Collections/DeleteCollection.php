@@ -17,6 +17,8 @@ class DeleteCollection extends DeleteAction
 
         $this->label(
             __('lunarpanel::actions.collections.delete.label')
+        )->recordTitle(
+            __('lunarpanel::collection.label')
         );
     }
 }

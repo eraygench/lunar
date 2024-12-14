@@ -32,6 +32,12 @@ class ProductVariantLimitationRelationManager extends BaseRelationManager
             ->description(
                 __('lunarpanel::discount.relationmanagers.productvariants.description')
             )
+            ->emptyStateHeading(
+                __('lunarpanel::discount.relationmanagers.productvariants.empty_state.label')
+            )
+            ->emptyStateDescription(
+                __('lunarpanel::discount.relationmanagers.productvariants.empty_state.description')
+            )
             ->paginated(false)
             ->modifyQueryUsing(
                 fn ($query) => $query->whereIn('type', ['limitation', 'exclusion'])
@@ -41,29 +47,31 @@ class ProductVariantLimitationRelationManager extends BaseRelationManager
                     ->whereHas('purchasable')
             )
             ->headerActions([
-                Tables\Actions\CreateAction::make()->form([
-                    Forms\Components\MorphToSelect::make('purchasable')
-                        ->searchable(true)
-                        ->types([
-                            Forms\Components\MorphToSelect\Type::make(ProductVariant::class)
-                                ->titleAttribute('sku')
-                                ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search): array {
-                                    $products = get_search_builder(Product::class, $search)
-                                        ->get();
+                Tables\Actions\CreateAction::make()
+                    ->modalHeading(__('lunarpanel::discount.relationmanagers.productvariants.actions.attach.label'))
+                    ->form([
+                        Forms\Components\MorphToSelect::make('purchasable')
+                            ->searchable(true)
+                            ->types([
+                                Forms\Components\MorphToSelect\Type::make(ProductVariant::class)
+                                    ->titleAttribute('sku')
+                                    ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search): array {
+                                        $products = get_search_builder(Product::class, $search)
+                                            ->get();
 
-                                    return ProductVariant::whereIn('product_id', $products->pluck('id'))
-                                        ->get()
-                                        ->mapWithKeys(fn (ProductVariant $record): array => [$record->getKey() => $record->product->attr('name').' - '.$record->sku])
-                                        ->all();
-                                }),
-                        ]),
-                ])->label(
-                    __('lunarpanel::discount.relationmanagers.productvariants.actions.attach.label')
-                )->mutateFormDataUsing(function (array $data) {
-                    $data['type'] = 'limitation';
+                                        return ProductVariant::whereIn('product_id', $products->pluck('id'))
+                                            ->get()
+                                            ->mapWithKeys(fn (ProductVariant $record): array => [$record->getKey() => $record->product->attr('name').' - '.$record->sku])
+                                            ->all();
+                                    }),
+                            ]),
+                    ])->label(
+                        __('lunarpanel::discount.relationmanagers.productvariants.actions.attach.label')
+                    )->mutateFormDataUsing(function (array $data) {
+                        $data['type'] = 'limitation';
 
-                    return $data;
-                }),
+                        return $data;
+                    }),
             ])->columns([
                 Tables\Columns\TextColumn::make('purchasable')
                     ->formatStateUsing(

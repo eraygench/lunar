@@ -72,7 +72,7 @@ class AttributeGroupResource extends BaseResource
             ->options(function () {
                 return AttributeManifest::getTypes()->mapWithKeys(
                     fn ($type) => [
-                        \Lunar\Facades\ModelManifest::getMorphMapKey($type) => class_basename($type),
+                        \Lunar\Facades\ModelManifest::getMorphMapKey($type) => __('lunarpanel::attributegroup.attributable_types.'.\Lunar\Facades\ModelManifest::getMorphMapKey($type)),
                     ]
                 );
             })
@@ -117,9 +117,12 @@ class AttributeGroupResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::attributegroup.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::attributegroup.empty_state.description'))
             ->columns([
                 Tables\Columns\TextColumn::make('attributable_type')
-                    ->label(__('lunarpanel::attributegroup.table.attributable_type.label')),
+                    ->label(__('lunarpanel::attributegroup.table.attributable_type.label'))
+                    ->formatStateUsing(fn ($state) => __('lunarpanel::attributegroup.attributable_types.'.$state)),
                 TranslatedTextColumn::make('name')
                     ->label(__('lunarpanel::attributegroup.table.name.label')),
                 Tables\Columns\TextColumn::make('handle')

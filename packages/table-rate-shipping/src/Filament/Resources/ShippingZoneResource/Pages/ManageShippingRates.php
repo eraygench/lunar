@@ -131,39 +131,43 @@ class ManageShippingRates extends ManageRelatedRecords
 
     public function table(Table $table): Table
     {
-        return $table->columns([
-            TextColumn::make('shippingMethod.name')
-                ->label(
-                    __('lunarpanel.shipping::relationmanagers.shipping_rates.table.shipping_method.label')
+        return $table
+            ->modelLabel(__('lunarpanel.shipping::relationmanagers.shipping_rates.title'))
+            ->emptyStateHeading(__('lunarpanel.shipping::relationmanagers.shipping_rates.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel.shipping::relationmanagers.shipping_rates.empty_state.description'))
+            ->columns([
+                TextColumn::make('shippingMethod.name')
+                    ->label(
+                        __('lunarpanel.shipping::relationmanagers.shipping_rates.table.shipping_method.label')
+                    ),
+                TextColumn::make('basePrices.0')->formatStateUsing(
+                    fn ($state = null) => $state->price->formatted
+                )->label(
+                    __('lunarpanel.shipping::relationmanagers.shipping_rates.table.price.label')
                 ),
-            TextColumn::make('basePrices.0')->formatStateUsing(
-                fn ($state = null) => $state->price->formatted
-            )->label(
-                __('lunarpanel.shipping::relationmanagers.shipping_rates.table.price.label')
-            ),
-            TextColumn::make('price_breaks_count')
-                ->label(
-                    __('lunarpanel.shipping::relationmanagers.shipping_rates.table.price_breaks_count.label')
-                )->counts('priceBreaks'),
-        ])->headerActions([
-            Tables\Actions\CreateAction::make()->label(
-                __('lunarpanel.shipping::relationmanagers.shipping_rates.actions.create.label')
-            )->action(function (Table $table, ?ShippingRate $shippingRate = null, array $data = []) {
-                $relationship = $table->getRelationship();
+                TextColumn::make('price_breaks_count')
+                    ->label(
+                        __('lunarpanel.shipping::relationmanagers.shipping_rates.table.price_breaks_count.label')
+                    )->counts('priceBreaks'),
+            ])->headerActions([
+                Tables\Actions\CreateAction::make()->label(
+                    __('lunarpanel.shipping::relationmanagers.shipping_rates.actions.create.label')
+                )->action(function (Table $table, ?ShippingRate $shippingRate = null, array $data = []) {
+                    $relationship = $table->getRelationship();
 
-                $record = new ShippingRate;
-                $record->shipping_method_id = $data['shipping_method_id'];
-                $relationship->save($record);
+                    $record = new ShippingRate;
+                    $record->shipping_method_id = $data['shipping_method_id'];
+                    $relationship->save($record);
 
-                static::saveShippingRate($record, $data);
-            })->slideOver(),
-        ])->actions([
+                    static::saveShippingRate($record, $data);
+                })->slideOver(),
+            ])->actions([
 
-            Tables\Actions\EditAction::make()->slideOver()->action(function (ShippingRate $shippingRate, array $data) {
-                static::saveShippingRate($shippingRate, $data);
-            }),
-            Tables\Actions\DeleteAction::make()->requiresConfirmation(),
-        ]);
+                Tables\Actions\EditAction::make()->slideOver()->action(function (ShippingRate $shippingRate, array $data) {
+                    static::saveShippingRate($shippingRate, $data);
+                }),
+                Tables\Actions\DeleteAction::make()->requiresConfirmation(),
+            ]);
     }
 
     protected static function saveShippingRate(?ShippingRate $shippingRate = null, array $data = []): void

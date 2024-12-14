@@ -59,7 +59,7 @@
               </tbody>
             </x-filament-tables::table>
           @else
-            <x-filament-tables::empty-state heading="No Product Options Configured" icon="lucide-shapes"></x-filament-tables::empty-state>
+            <x-filament-tables::empty-state :heading="__('lunarpanel::productoption.widgets.product-options.options-list.empty.heading')" icon="lucide-shapes"></x-filament-tables::empty-state>
           @endif
         </div>
       </div>

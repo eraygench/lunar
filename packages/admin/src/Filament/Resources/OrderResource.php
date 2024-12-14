@@ -57,6 +57,8 @@ class OrderResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::order.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::order.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters(static::getTableFilters())
             ->persistFiltersInSession()

@@ -57,56 +57,60 @@ class ManageCollectionProducts extends BaseManageRelatedRecords
 
     public function table(Table $table): Table
     {
-        return $table->columns([
+        return $table
+            ->modelLabel(__('lunarpanel::product.label'))
+            ->emptyStateHeading(__('lunarpanel::collection.pages.products.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::collection.pages.products.empty_state.description'))
+            ->columns([
 
-            Tables\Columns\SpatieMediaLibraryImageColumn::make('thumbnail')
-                ->collection(config('lunar.media.collection'))
-                ->conversion('small')
-                ->limit(1)
-                ->square()
-                ->label(''),
-            Tables\Columns\TextColumn::make('attribute_data.name')
-                ->formatStateUsing(fn (Model $record): string => $record->translateAttribute('name'))
-                ->label(__('lunarpanel::product.table.name.label')),
-        ])->actions([
-            Tables\Actions\DetachAction::make()->after(
-                fn () => CollectionProductDetached::dispatch($this->getOwnerRecord())
-            ),
-            Tables\Actions\EditAction::make()->url(
-                fn (Model $record) => ProductResource::getUrl('edit', [
-                    'record' => $record,
-                ])
-            ),
-        ])->headerActions([
-            Tables\Actions\AttachAction::make()
-                ->label(
-                    __('lunarpanel::collection.pages.products.actions.attach.label')
-                )->form([
-                    Forms\Components\Select::make('recordId')
-                        ->label('Product')
-                        ->required()
-                        ->searchable(true)
-                        ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search, ManageCollectionProducts $livewire): array {
-                            $relationModel = $livewire->getRelationship()->getRelated()::class;
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('thumbnail')
+                    ->collection(config('lunar.media.collection'))
+                    ->conversion('small')
+                    ->limit(1)
+                    ->square()
+                    ->label(''),
+                Tables\Columns\TextColumn::make('attribute_data.name')
+                    ->formatStateUsing(fn (Model $record): string => $record->translateAttribute('name'))
+                    ->label(__('lunarpanel::product.table.name.label')),
+            ])->actions([
+                Tables\Actions\DetachAction::make()->after(
+                    fn () => CollectionProductDetached::dispatch($this->getOwnerRecord())
+                ),
+                Tables\Actions\EditAction::make()->url(
+                    fn (Model $record) => ProductResource::getUrl('edit', [
+                        'record' => $record,
+                    ])
+                ),
+            ])->headerActions([
+                Tables\Actions\AttachAction::make()
+                    ->label(
+                        __('lunarpanel::collection.pages.products.actions.attach.label')
+                    )->form([
+                        Forms\Components\Select::make('recordId')
+                            ->label(__('lunarpanel::product.label'))
+                            ->required()
+                            ->searchable(true)
+                            ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search, ManageCollectionProducts $livewire): array {
+                                $relationModel = $livewire->getRelationship()->getRelated()::class;
 
-                            return get_search_builder($relationModel, $search)
-                                ->get()
-                                ->mapWithKeys(fn (Product $record): array => [$record->getKey() => $record->translateAttribute('name')])
-                                ->all();
-                        }),
-                ])->action(function (array $arguments, array $data, Form $form, Table $table) {
-                    $relationship = Relation::noConstraints(fn () => $table->getRelationship());
+                                return get_search_builder($relationModel, $search)
+                                    ->get()
+                                    ->mapWithKeys(fn (Product $record): array => [$record->getKey() => $record->translateAttribute('name')])
+                                    ->all();
+                            }),
+                    ])->action(function (array $arguments, array $data, Form $form, Table $table) {
+                        $relationship = Relation::noConstraints(fn () => $table->getRelationship());
 
-                    $product = Product::find($data['recordId']);
+                        $product = Product::find($data['recordId']);
 
-                    $relationship->attach($product, [
-                        'position' => $relationship->count() + 1,
-                    ]);
+                        $relationship->attach($product, [
+                            'position' => $relationship->count() + 1,
+                        ]);
 
-                    CollectionProductAttached::dispatch($this->getOwnerRecord());
+                        CollectionProductAttached::dispatch($this->getOwnerRecord());
 
-                    $product->searchable();
-                }),
-        ])->reorderable('position');
+                        $product->searchable();
+                    }),
+            ])->reorderable('position');
     }
 }

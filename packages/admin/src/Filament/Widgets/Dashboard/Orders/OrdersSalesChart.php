@@ -2,6 +2,7 @@
 
 namespace Lunar\Admin\Filament\Widgets\Dashboard\Orders;
 
+use Carbon\Carbon;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Lunar\Facades\DB;
@@ -62,7 +63,7 @@ class OrdersSalesChart extends ApexChartWidget
         $salesData = [];
 
         foreach ($orders as $order) {
-            $labels[] = $order->date;
+            $labels[] = Carbon::make($order->sort_date)->isoFormat('MMMM YYYY');
             $ordersData[] = $order->count;
             $salesData[] = $order->sub_total->decimal;
         }

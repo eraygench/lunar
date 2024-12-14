@@ -21,6 +21,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No attributes',
+        'description' => '',
+    ],
+
     'form' => [
         'attributable_type' => [
             'label' => 'Type',

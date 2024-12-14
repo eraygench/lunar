@@ -21,6 +21,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No channels',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',

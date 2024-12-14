@@ -14,6 +14,11 @@ class CollectionLimitationRelationManager extends BaseRelationManager
 
     protected static string $relationship = 'collections';
 
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::collection.label');
+    }
+
     public function isReadOnly(): bool
     {
         return false;
@@ -23,14 +28,24 @@ class CollectionLimitationRelationManager extends BaseRelationManager
     {
 
         return $table
+            ->heading(
+                __('lunarpanel::discount.relationmanagers.collections.title')
+            )
             ->description(
                 __('lunarpanel::discount.relationmanagers.collections.description')
+            )
+            ->emptyStateHeading(
+                __('lunarpanel::discount.relationmanagers.collections.empty_state.label')
+            )
+            ->emptyStateDescription(
+                __('lunarpanel::discount.relationmanagers.collections.empty_state.description')
             )
             ->paginated(false)
             ->headerActions([
                 Tables\Actions\AttachAction::make()->form(fn (Tables\Actions\AttachAction $action): array => [
                     $action->getRecordSelect(),
                     Select::make('type')
+                        ->label(__('lunarpanel::discount.relationmanagers.collections.form.type.label'))
                         ->options(
                             fn () => [
                                 'limitation' => __('lunarpanel::discount.relationmanagers.collections.form.type.options.limitation.label'),

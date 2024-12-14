@@ -9,6 +9,16 @@ class Taxes extends Cluster
 {
     protected static ?int $navigationSort = 5;
 
+    public static function getClusterBreadcrumb(): ?string
+    {
+        return __('lunarpanel::taxes.label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('lunarpanel::taxes.label');
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return __('lunarpanel::global.sections.settings');

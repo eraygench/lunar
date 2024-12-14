@@ -18,6 +18,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No customer groups',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',

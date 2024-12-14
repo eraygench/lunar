@@ -15,6 +15,16 @@ class AddressRelationManager extends BaseRelationManager
 {
     protected static string $relationship = 'addresses';
 
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('lunarpanel::address.plural_label');
+    }
+
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::address.label');
+    }
+
     public function isReadOnly(): bool
     {
         return false;
@@ -26,6 +36,8 @@ class AddressRelationManager extends BaseRelationManager
             ->heading(
                 __('lunarpanel::address.plural_label')
             )
+            ->emptyStateHeading(__('lunarpanel::address.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::address.empty_state.description'))
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label(
                     __('lunarpanel::address.table.title.label')

@@ -18,6 +18,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No tax rates',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',

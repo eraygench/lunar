@@ -102,26 +102,29 @@ class CurrencyResource extends BaseResource
 
     protected static function getDefaultTable(Tables\Table $table): Tables\Table
     {
-        return $table->columns([
-            BadgeableColumn::make('name')
-                ->separator('')
-                ->suffixBadges([
-                    Badge::make('default')
-                        ->label(__('lunarpanel::currency.table.default.label'))
-                        ->color('gray')
-                        ->visible(fn (Model $record) => $record->default),
-                ])
-                ->label(__('lunarpanel::currency.table.name.label')),
-            Tables\Columns\TextColumn::make('code')
-                ->label(__('lunarpanel::currency.table.code.label')),
-            Tables\Columns\TextColumn::make('exchange_rate')
-                ->label(__('lunarpanel::currency.table.exchange_rate.label')),
-            Tables\Columns\TextColumn::make('decimal_places')
-                ->label(__('lunarpanel::currency.table.decimal_places.label')),
-            Tables\Columns\IconColumn::make('enabled')
-                ->boolean()
-                ->label(__('lunarpanel::currency.table.enabled.label')),
-        ]);
+        return $table
+            ->emptyStateHeading(__('lunarpanel::currency.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::currency.empty_state.description'))
+            ->columns([
+                BadgeableColumn::make('name')
+                    ->separator('')
+                    ->suffixBadges([
+                        Badge::make('default')
+                            ->label(__('lunarpanel::currency.table.default.label'))
+                            ->color('gray')
+                            ->visible(fn (Model $record) => $record->default),
+                    ])
+                    ->label(__('lunarpanel::currency.table.name.label')),
+                Tables\Columns\TextColumn::make('code')
+                    ->label(__('lunarpanel::currency.table.code.label')),
+                Tables\Columns\TextColumn::make('exchange_rate')
+                    ->label(__('lunarpanel::currency.table.exchange_rate.label')),
+                Tables\Columns\TextColumn::make('decimal_places')
+                    ->label(__('lunarpanel::currency.table.decimal_places.label')),
+                Tables\Columns\IconColumn::make('enabled')
+                    ->boolean()
+                    ->label(__('lunarpanel::currency.table.enabled.label')),
+            ]);
     }
 
     public static function getDefaultPages(): array

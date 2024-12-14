@@ -23,7 +23,13 @@ class LatestOrdersTable extends TableWidget
 
     public function table(Table $table): Table
     {
-        return $table->query(function () {
+        return $table->heading(
+            fn () => __('lunarpanel::widgets.dashboard.orders.latest_orders.heading')
+        )->emptyStateHeading(
+            fn () => __('lunarpanel::widgets.dashboard.orders.latest_orders.empty_state.label')
+        )->emptyStateDescription(
+            fn () => __('lunarpanel::widgets.dashboard.orders.latest_orders.empty_state.description')
+        )->query(function () {
             return Order::orderBy('placed_at', 'desc')->orderBy('created_at', 'desc')->limit(10);
         })->columns(
             OrderResource::getTableColumns()

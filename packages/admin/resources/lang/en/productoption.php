@@ -21,6 +21,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No product options',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',
@@ -46,11 +51,17 @@ return [
                 'cancel' => [
                     'label' => 'Cancel',
                 ],
+                'save-variants' => [
+                    'label' => 'Save Variants',
+                ],
                 'save-options' => [
                     'label' => 'Save Options',
                 ],
                 'add-shared-option' => [
                     'label' => 'Add Shared Option',
+                    'modal' => [
+                        'heading' => 'Add Shared Option',
+                    ],
                     'form' => [
                         'product_option' => [
                             'label' => 'Product Option',

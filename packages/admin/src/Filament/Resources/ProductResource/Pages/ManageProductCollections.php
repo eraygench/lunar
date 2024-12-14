@@ -25,17 +25,20 @@ class ManageProductCollections extends BaseManageRelatedRecords
 
     public function getTitle(): string
     {
-        return __('lunarpanel::product.pages.collections.label');
+        return __('lunarpanel::product.pages.collections.plural_label');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('lunarpanel::product.pages.collections.label');
+        return __('lunarpanel::product.pages.collections.plural_label');
     }
 
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('lunarpanel::product.pages.collections.label'))
+            ->emptyStateHeading(__('lunarpanel::product.pages.collections.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::product.pages.collections.empty_state.description'))
             ->recordTitleAttribute('name')
             ->columns([
                 TranslatedTextColumn::make('attribute_data.name')

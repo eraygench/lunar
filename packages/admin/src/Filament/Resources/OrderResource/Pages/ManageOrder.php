@@ -111,6 +111,7 @@ class ManageOrder extends BaseViewRecord
             ->size(TextEntrySize::Large)
             ->hiddenLabel()
             ->suffixAction(fn ($state) => Action::make('view customer')
+                ->label(__('lunarpanel::order.action.view_customer.label'))
                 ->color('gray')
                 ->button()
                 ->size(ActionSize::ExtraSmall)

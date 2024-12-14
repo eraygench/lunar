@@ -72,6 +72,11 @@ class ManageProductPricing extends BaseEditRecord
         ];
     }
 
+    public function getBreadcrumb(): string
+    {
+        return __('lunarpanel::relationmanagers.pricing.title');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('lunarpanel::relationmanagers.pricing.title');

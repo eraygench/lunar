@@ -171,6 +171,8 @@ class CustomerResource extends BaseResource
     protected static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::customer.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::customer.empty_state.description'))
             ->columns([
                 Tables\Columns\TextColumn::make('first_name')
                     ->label(__('lunarpanel::customer.table.first_name.label'))

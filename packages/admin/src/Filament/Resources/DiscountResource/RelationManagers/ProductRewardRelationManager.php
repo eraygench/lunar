@@ -35,6 +35,12 @@ class ProductRewardRelationManager extends BaseRelationManager
             ->description(
                 __('lunarpanel::discount.relationmanagers.rewards.description')
             )
+            ->emptyStateHeading(
+                __('lunarpanel::discount.relationmanagers.rewards.empty_state.label')
+            )
+            ->emptyStateDescription(
+                __('lunarpanel::discount.relationmanagers.rewards.empty_state.description')
+            )
             ->paginated(false)
             ->modifyQueryUsing(
                 fn ($query) => $query->whereIn('type', ['reward'])
@@ -42,26 +48,28 @@ class ProductRewardRelationManager extends BaseRelationManager
                     ->whereHas('purchasable')
             )
             ->headerActions([
-                Tables\Actions\CreateAction::make()->form([
-                    Forms\Components\MorphToSelect::make('purchasable')
-                        ->searchable(true)
-                        ->types([
-                            Forms\Components\MorphToSelect\Type::make(Product::class)
-                                ->titleAttribute('name.en')
-                                ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search): array {
-                                    return get_search_builder(Product::class, $search)
-                                        ->get()
-                                        ->mapWithKeys(fn (Product $record): array => [$record->getKey() => $record->attr('name')])
-                                        ->all();
-                                }),
-                        ]),
-                ])->label(
-                    __('lunarpanel::discount.relationmanagers.rewards.actions.attach.label')
-                )->mutateFormDataUsing(function (array $data) {
-                    $data['type'] = 'reward';
+                Tables\Actions\CreateAction::make()
+                    ->modalHeading(__('lunarpanel::discount.relationmanagers.rewards.actions.attach.label'))
+                    ->form([
+                        Forms\Components\MorphToSelect::make('purchasable')
+                            ->searchable(true)
+                            ->types([
+                                Forms\Components\MorphToSelect\Type::make(Product::class)
+                                    ->titleAttribute('name.en')
+                                    ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search): array {
+                                        return get_search_builder(Product::class, $search)
+                                            ->get()
+                                            ->mapWithKeys(fn (Product $record): array => [$record->getKey() => $record->attr('name')])
+                                            ->all();
+                                    }),
+                            ]),
+                    ])->label(
+                        __('lunarpanel::discount.relationmanagers.rewards.actions.attach.label')
+                    )->mutateFormDataUsing(function (array $data) {
+                        $data['type'] = 'reward';
 
-                    return $data;
-                }),
+                        return $data;
+                    }),
             ])->columns([
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('purchasable.thumbnail')
                     ->collection(config('lunar.media.collection'))

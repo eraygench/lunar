@@ -19,6 +19,11 @@ class ShippingExclusionRelationManager extends RelationManager
         return __('lunarpanel.shipping::relationmanagers.exclusions.title_plural');
     }
 
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel.shipping::relationmanagers.exclusions.title');
+    }
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public function form(Form $form): Form
@@ -50,6 +55,8 @@ class ShippingExclusionRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel.shipping::relationmanagers.exclusions.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel.shipping::relationmanagers.exclusions.empty_state.description'))
             ->columns([
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('purchasable.thumbnail')
                     ->collection(config('lunar.media.collection'))

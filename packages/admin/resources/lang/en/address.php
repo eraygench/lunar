@@ -48,6 +48,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No addresses',
+        'description' => '',
+    ],
+
     'form' => [
         'title' => [
             'label' => 'Title',

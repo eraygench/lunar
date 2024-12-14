@@ -81,6 +81,7 @@ class TaxZoneResource extends BaseResource
             ->label(__('lunarpanel::taxzone.form.zone_type.label'))
             ->live()
             ->required()
+            ->default('country')
             ->selectablePlaceholder(false);
     }
 
@@ -301,6 +302,8 @@ class TaxZoneResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::taxzone.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::taxzone.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //
@@ -328,7 +331,8 @@ class TaxZoneResource extends BaseResource
                 ])
                 ->label(__('lunarpanel::taxzone.table.name.label')),
             Tables\Columns\TextColumn::make('zone_type')
-                ->label(__('lunarpanel::taxzone.table.zone_type.label')),
+                ->label(__('lunarpanel::taxzone.table.zone_type.label'))
+                ->formatStateUsing(fn ($state) => __('lunarpanel::taxzone.table.zone_type.options.'.$state)),
             Tables\Columns\IconColumn::make('active')
                 ->boolean()
                 ->label(__('lunarpanel::taxzone.table.active.label')),

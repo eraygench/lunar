@@ -18,6 +18,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No languages',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',

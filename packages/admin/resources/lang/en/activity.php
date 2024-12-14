@@ -11,9 +11,21 @@ return [
         'description' => 'Description',
         'log' => 'Log',
         'logged_at' => 'Logged At',
-        'event' => 'Event',
+        'event' => [
+            'label' => 'Event',
+            'options' => [
+                'created' => 'Created',
+                'updated' => 'Updated',
+                'deleted' => 'Deleted',
+            ],
+        ],
         'logged_from' => 'Logged From',
         'logged_until' => 'Logged Until',
+    ],
+
+    'empty_state' => [
+        'label' => 'No activities',
+        'description' => '',
     ],
 
     'form' => [

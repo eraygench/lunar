@@ -55,6 +55,8 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
             ->get();
 
         return Action::make('addSharedOption')
+            ->label(__('lunarpanel::productoption.widgets.product-options.actions.add-shared-option.label'))
+            ->modalHeading(__('lunarpanel::productoption.widgets.product-options.actions.add-shared-option.modal.heading'))
             ->form([
                 Shout::make('no_shared_components')
                     ->content(
@@ -341,6 +343,7 @@ class ProductOptionsWidget extends BaseWidget implements HasActions, HasForms
     public function saveVariantsAction()
     {
         return Action::make('saveVariants')
+            ->label(__('lunarpanel::productoption.widgets.product-options.actions.save-variants.label'))
             ->action(function () {
                 DB::beginTransaction();
 

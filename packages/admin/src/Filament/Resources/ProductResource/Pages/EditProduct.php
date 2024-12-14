@@ -43,10 +43,12 @@ class EditProduct extends BaseEditRecord
                 ->record(
                     $this->record
                 )->form([
-                    Forms\Components\Radio::make('status')->options([
-                        'published' => __('lunarpanel::product.form.status.options.published.label'),
-                        'draft' => __('lunarpanel::product.form.status.options.draft.label'),
-                    ])
+                    Forms\Components\Radio::make('status')
+                        ->label(__('lunarpanel::product.form.status.label'))
+                        ->options([
+                            'published' => __('lunarpanel::product.form.status.options.published.label'),
+                            'draft' => __('lunarpanel::product.form.status.options.draft.label'),
+                        ])
                         ->descriptions([
                             'published' => __('lunarpanel::product.form.status.options.published.description'),
                             'draft' => __('lunarpanel::product.form.status.options.draft.description'),

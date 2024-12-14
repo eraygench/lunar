@@ -15,6 +15,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No users',
+        'description' => '',
+    ],
+
     'form' => [
         'email' => [
             'label' => 'Email',

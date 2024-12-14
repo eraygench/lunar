@@ -21,6 +21,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No product types',
+        'description' => '',
+    ],
+
     'tabs' => [
         'product_attributes' => [
             'label' => 'Product Attributes',

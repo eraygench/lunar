@@ -49,7 +49,14 @@ return [
             ],
         ],
     ],
+    'empty_state' => [
+        'label' => 'No shipping methods',
+        'description' => '',
+    ],
     'pages' => [
+        'edit' => [
+            'label' => 'Basic Information',
+        ],
         'availability' => [
             'label' => 'Availability',
             'customer_groups' => 'This shipping method is currently unavailable across all customer groups.',

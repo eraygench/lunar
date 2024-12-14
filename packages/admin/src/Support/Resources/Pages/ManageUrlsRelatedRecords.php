@@ -71,6 +71,9 @@ class ManageUrlsRelatedRecords extends BaseManageRelatedRecords
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('lunarpanel::relationmanagers.urls.title'))
+            ->emptyStateHeading(__('lunarpanel::relationmanagers.urls.table.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::relationmanagers.urls.table.empty_state.description'))
             ->recordTitleAttribute('name')
             ->modifyQueryUsing(fn (Builder $query) => $query->orderBy('language_id')->orderBy('default', 'desc'))
             ->columns([

@@ -26,12 +26,12 @@ class ManageProductAssociations extends BaseManageRelatedRecords
 
     public function getTitle(): string
     {
-        return __('lunarpanel::product.pages.associations.label');
+        return __('lunarpanel::product.pages.associations.plural_label');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('lunarpanel::product.pages.associations.label');
+        return __('lunarpanel::product.pages.associations.plural_label');
     }
 
     public function form(Form $form): Form
@@ -39,7 +39,7 @@ class ManageProductAssociations extends BaseManageRelatedRecords
         return $form
             ->schema([
                 Forms\Components\Select::make('product_target_id')
-                    ->label('Product')
+                    ->label(__('lunarpanel::product.label'))
                     ->required()
                     ->searchable(true)
                     ->getSearchResultsUsing(static function (Forms\Components\Select $component, string $search): array {
@@ -49,11 +49,12 @@ class ManageProductAssociations extends BaseManageRelatedRecords
                             ->all();
                     }),
                 Forms\Components\Select::make('type')
+                    ->label(__('lunarpanel::product.pages.associations.form.type.label'))
                     ->required()
-                    ->options([
-                        ProductAssociation::ALTERNATE => 'Alternate',
-                        ProductAssociation::CROSS_SELL => 'Cross-Sell',
-                        ProductAssociation::UP_SELL => 'Upsell',
+                    ->options(fn () => [
+                        ProductAssociation::ALTERNATE => __('lunarpanel::product.pages.associations.form.type.options.alternate'),
+                        ProductAssociation::CROSS_SELL => __('lunarpanel::product.pages.associations.form.type.options.cross-sell'),
+                        ProductAssociation::UP_SELL => __('lunarpanel::product.pages.associations.form.type.options.up-sell'),
                     ]),
             ]);
     }
@@ -61,6 +62,9 @@ class ManageProductAssociations extends BaseManageRelatedRecords
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('lunarpanel::product.pages.associations.label'))
+            ->emptyStateHeading(__('lunarpanel::product.pages.associations.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::product.pages.associations.empty_state.description'))
             ->recordTitleAttribute('name')
             ->inverseRelationship('parent')
             ->columns([
@@ -80,7 +84,9 @@ class ManageProductAssociations extends BaseManageRelatedRecords
                     ->label(__('lunarpanel::product.table.name.label')),
                 Tables\Columns\TextColumn::make('target.variants.sku')
                     ->label('SKU'),
-                Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\TextColumn::make('type')
+                    ->label(__('lunarpanel::product.pages.associations.form.type.label'))
+                    ->formatStateUsing(fn ($state) => __('lunarpanel::product.pages.associations.form.type.options.'.$state)),
             ])
             ->filters([
                 //

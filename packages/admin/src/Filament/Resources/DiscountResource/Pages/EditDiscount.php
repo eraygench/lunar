@@ -3,6 +3,7 @@
 namespace Lunar\Admin\Filament\Resources\DiscountResource\Pages;
 
 use Filament\Actions;
+use Illuminate\Contracts\Support\Htmlable;
 use Lunar\Admin\Base\LunarPanelDiscountInterface;
 use Lunar\Admin\Filament\Resources\DiscountResource;
 use Lunar\Admin\Support\Pages\BaseEditRecord;
@@ -12,6 +13,16 @@ use Lunar\Models\Currency;
 class EditDiscount extends BaseEditRecord
 {
     protected static string $resource = DiscountResource::class;
+
+    public function getTitle(): string|Htmlable
+    {
+        return __('lunarpanel::discount.pages.edit.label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('lunarpanel::discount.pages.edit.label');
+    }
 
     protected function getDefaultHeaderActions(): array
     {

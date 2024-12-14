@@ -86,6 +86,8 @@ class CustomerGroupResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::customergroup.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::customergroup.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

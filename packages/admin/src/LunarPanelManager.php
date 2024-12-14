@@ -247,10 +247,12 @@ class LunarPanelManager
                 \Lunar\Admin\Filament\Resources\CollectionGroupResource\Widgets\CollectionTreeView::class,
             ])
             ->navigationGroups([
-                'Catalog',
-                'Sales',
                 NavigationGroup::make()
-                    ->label('Settings')
+                    ->label(fn () => __('lunarpanel::global.sections.catalog')),
+                NavigationGroup::make()
+                    ->label(fn () => __('lunarpanel::global.sections.sales')),
+                NavigationGroup::make()
+                    ->label(fn () => __('lunarpanel::global.sections.settings'))
                     ->collapsed(),
             ])->sidebarCollapsibleOnDesktop();
     }

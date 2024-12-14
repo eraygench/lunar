@@ -12,6 +12,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No tags',
+        'description' => '',
+    ],
+
     'form' => [
         'value' => [
             'label' => 'Value',

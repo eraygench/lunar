@@ -93,6 +93,8 @@ class ProductTypeResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::producttype.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::producttype.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

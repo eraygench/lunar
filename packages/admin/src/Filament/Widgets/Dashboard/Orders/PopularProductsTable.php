@@ -31,6 +31,12 @@ class PopularProductsTable extends TableWidget
             ->description(
                 fn () => __('lunarpanel::widgets.dashboard.orders.popular_products.description')
             )
+            ->emptyStateHeading(
+                fn () => __('lunarpanel::widgets.dashboard.orders.popular_products.empty_state.label')
+            )
+            ->emptyStateDescription(
+                fn () => __('lunarpanel::widgets.dashboard.orders.popular_products.empty_state.description')
+            )
             ->query(function () {
                 return OrderLine::query()->whereHas('order', function ($relation) {
                     $relation->whereBetween('placed_at', [
@@ -47,10 +53,15 @@ class PopularProductsTable extends TableWidget
                     ->whereType('physical');
             })->defaultSort('quantity', 'desc')
             ->columns([
-                TextColumn::make('description'),
-                TextColumn::make('identifier'),
-                TextColumn::make('quantity'),
-                TextColumn::make('sub_total')->formatStateUsing(fn ($state): string => $state->formatted),
+                TextColumn::make('description')
+                    ->label(__('lunarpanel::widgets.dashboard.orders.popular_products.table.description.label')),
+                TextColumn::make('identifier')
+                    ->label(__('lunarpanel::widgets.dashboard.orders.popular_products.table.identifier.label')),
+                TextColumn::make('quantity')
+                    ->label(__('lunarpanel::widgets.dashboard.orders.popular_products.table.quantity.label')),
+                TextColumn::make('sub_total')
+                    ->label(__('lunarpanel::widgets.dashboard.orders.popular_products.table.sub_total.label'))
+                    ->formatStateUsing(fn ($state): string => $state->formatted),
             ]);
     }
 }

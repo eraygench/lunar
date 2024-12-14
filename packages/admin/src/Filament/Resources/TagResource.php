@@ -58,6 +58,8 @@ class TagResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::tag.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::tag.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

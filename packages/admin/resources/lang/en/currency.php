@@ -27,6 +27,11 @@ return [
         ],
     ],
 
+    'empty_state' => [
+        'label' => 'No currencies',
+        'description' => '',
+    ],
+
     'form' => [
         'name' => [
             'label' => 'Name',

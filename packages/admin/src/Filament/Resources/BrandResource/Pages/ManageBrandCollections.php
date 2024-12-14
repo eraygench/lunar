@@ -36,7 +36,13 @@ class ManageBrandCollections extends BaseManageRelatedRecords
 
     public function table(Table $table): Table
     {
-        return $table->columns([
+        return $table->modelLabel(
+            __('lunarpanel::collection.label')
+        )->emptyStateHeading(
+            fn () => __('lunarpanel::brand.pages.collections.empty_state.label')
+        )->emptyStateDescription(
+            fn () => __('lunarpanel::brand.pages.collections.empty_state.description')
+        )->columns([
             TranslatedTextColumn::make('attribute_data.name')
                 ->attributeData()
                 ->limitedTooltip()

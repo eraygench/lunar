@@ -255,7 +255,9 @@ class DiscountResource extends BaseResource
 
     public static function getDiscountTypeFormComponent(): Component
     {
-        return Forms\Components\Select::make('type')->options(
+        return Forms\Components\Select::make('type')->label(
+            __('lunarpanel::discount.form.type.label')
+        )->options(
             Discounts::getTypes()->mapWithKeys(
                 fn ($type) => [get_class($type) => $type->getName()]
             )
@@ -284,10 +286,13 @@ class DiscountResource extends BaseResource
         }
 
         return [
-            Forms\Components\Toggle::make('data.fixed_value')->live(),
-            Forms\Components\TextInput::make('data.percentage')->visible(
-                fn (Forms\Get $get) => ! $get('data.fixed_value')
-            )->numeric(),
+            Forms\Components\Toggle::make('data.fixed_value')
+                ->label(__('lunarpanel::discount.form.fixed_value.label'))
+                ->live(),
+            Forms\Components\TextInput::make('data.percentage')
+                ->label(__('lunarpanel::discount.form.percentage.label'))
+                ->visible(fn (Forms\Get $get) => ! $get('data.fixed_value'))
+                ->numeric(),
             Forms\Components\Group::make(
                 $currencyInputs
             )->visible(
@@ -331,6 +336,8 @@ class DiscountResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::discount.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::discount.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

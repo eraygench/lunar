@@ -91,6 +91,8 @@ class ProductOptionResource extends BaseResource
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::productoption.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::productoption.empty_state.description'))
             ->columns([
                 TranslatedTextColumn::make('name')
                     ->label(__('lunarpanel::productoption.table.name.label')),
@@ -103,6 +105,7 @@ class ProductOptionResource extends BaseResource
             ])
             ->filters([
                 Tables\Filters\Filter::make('shared')
+                    ->label(__('lunarpanel::productoption.table.shared.label'))
                     ->query(fn (Builder $query): Builder => $query->where('shared', true)),
             ])
             ->actions([

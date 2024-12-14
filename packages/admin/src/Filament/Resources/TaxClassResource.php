@@ -62,12 +62,14 @@ class TaxClassResource extends BaseResource
     protected static function getDefaultFormComponent(): Component
     {
         return Forms\Components\Toggle::make('default')
-            ->label(__('lunarpanel::taxzone.form.default.label'));
+            ->label(__('lunarpanel::taxclass.form.default.label'));
     }
 
     public static function getDefaultTable(Table $table): Table
     {
         return $table
+            ->emptyStateHeading(__('lunarpanel::taxclass.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::taxclass.empty_state.description'))
             ->columns(static::getTableColumns())
             ->filters([
                 //

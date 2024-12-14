@@ -15,6 +15,16 @@ class UserRelationManager extends BaseRelationManager
 {
     protected static string $relationship = 'users';
 
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('lunarpanel::user.plural_label');
+    }
+
+    public static function getModelLabel(): ?string
+    {
+        return __('lunarpanel::user.label');
+    }
+
     public function isReadOnly(): bool
     {
         return false;
@@ -22,45 +32,47 @@ class UserRelationManager extends BaseRelationManager
 
     public function getDefaultTable(Table $table): Table
     {
-        return $table->columns([
-            Tables\Columns\TextColumn::make('name')
-                ->label(__('lunarpanel::user.table.name.label')),
-            Tables\Columns\TextColumn::make('email')
-                ->label(__('lunarpanel::user.table.email.label')),
-        ])->actions([
-            Tables\Actions\EditAction::make('edit')
-                ->after(
-                    fn (Model $record) => CustomerUserEdited::dispatch($record)
-                )
-                ->form([
-                    Group::make([
-                        TextInput::make('email')
-                            ->label(
-                                __('lunarpanel::user.form.email.label')
-                            )
-                            ->required()
-                            ->email()
-                            ->columnSpan(2),
-                        TextInput::make('password')
-                            ->label(
-                                __('lunarpanel::user.form.password.label')
-                            )
-                            ->password()
-                            ->minLength(8)
-                            ->required(fn ($record) => blank($record))
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn (?string $state): bool => filled($state))
-                            ->currentPassword(false)
-                            ->confirmed(),
-                        TextInput::make('password_confirmation')
-                            ->label(
-                                __('lunarpanel::user.form.password_confirmation.label')
-                            )
-                            ->password()
-                            ->minLength(8),
-                    ])->columns(2),
-
-                ]),
-        ]);
+        return $table
+            ->emptyStateHeading(__('lunarpanel::user.empty_state.label'))
+            ->emptyStateDescription(__('lunarpanel::user.empty_state.description'))
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('lunarpanel::user.table.name.label')),
+                Tables\Columns\TextColumn::make('email')
+                    ->label(__('lunarpanel::user.table.email.label')),
+            ])->actions([
+                Tables\Actions\EditAction::make('edit')
+                    ->after(
+                        fn (Model $record) => CustomerUserEdited::dispatch($record)
+                    )
+                    ->form([
+                        Group::make([
+                            TextInput::make('email')
+                                ->label(
+                                    __('lunarpanel::user.form.email.label')
+                                )
+                                ->required()
+                                ->email()
+                                ->columnSpan(2),
+                            TextInput::make('password')
+                                ->label(
+                                    __('lunarpanel::user.form.password.label')
+                                )
+                                ->password()
+                                ->minLength(8)
+                                ->required(fn ($record) => blank($record))
+                                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                ->dehydrated(fn (?string $state): bool => filled($state))
+                                ->currentPassword(false)
+                                ->confirmed(),
+                            TextInput::make('password_confirmation')
+                                ->label(
+                                    __('lunarpanel::user.form.password_confirmation.label')
+                                )
+                                ->password()
+                                ->minLength(8),
+                        ])->columns(2),
+                    ]),
+            ]);
     }
 }
